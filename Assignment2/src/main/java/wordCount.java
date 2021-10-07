@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.StringTokenizer;
 
+//Class name should start with uppercase and class name has to be a noun.
+//Create separate class one for mapper and one for reducer.
 public class wordCount {
 
     public static String rootUrl = "hdfs://localhost:8020";
