@@ -14,6 +14,9 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.HashMap;
 
+//Rename the class appropriately. i.e. HbaseWriterMain.
+//Add comments(Class and function comments) on what this code is going to do.
+//Follow object oriented approach, create a separate class for HBaseWriter and call it from main function.
 public class main {
     public static final String encoding = "UTF-8";
     public static final String hdfsUrl = "hdfs://localhost:8020";
@@ -35,7 +38,7 @@ public class main {
         hm.put(5, "Address");
         return hm;
     }
-
+    //Avoid static functions unless it is a utility class.
     public static void insertDataToHbase(String[] record, int rowId) throws IOException {
 
         Table table = null;
@@ -58,7 +61,7 @@ public class main {
 
             table.put(p);
 
-        }catch (Exception e) {
+        }catch (Exception e) { //Dont catch generic exception, catch specific exceptions.
             e.printStackTrace();
         } finally {
             if(table != null)
@@ -68,7 +71,7 @@ public class main {
         }
     }
 
-
+    //Avoid static functions.
     public static void storeInHBASE(FileSystem hdfs, String uri) throws IOException {
 
         config.set("fs.defaultFS", hdfsUrl);
@@ -80,6 +83,7 @@ public class main {
         int rowId = 1;
         for (Path path : paths) {
             FSDataInputStream inputStream = fileSystem.open(path);
+            //Use meaningfull variable names.
             String out = IOUtils.toString(inputStream, encoding).split("\n")[1];
             String[] record = out.split(",");
             insertDataToHbase(record, rowId);
