@@ -1,3 +1,5 @@
+package com.anmol;
+
 import org.apache.hadoop.conf.Configuration;
 import org.apache.commons.io.IOUtils;
 import org.apache.hadoop.fs.*;
@@ -9,26 +11,21 @@ import org.apache.hadoop.hbase.client.Put;
 import org.apache.hadoop.hbase.client.Table;
 import org.apache.hadoop.hbase.util.Bytes;
 
-
 import java.io.IOException;
-import java.net.URI;
 import java.util.HashMap;
 
-//Rename the class appropriately. i.e. HbaseWriterMain.
-//Add comments(Class and function comments) on what this code is going to do.
-//Follow object oriented approach, create a separate class for HBaseWriter and call it from main function.
-public class main {
-    public static final String encoding = "UTF-8";
-    public static final String hdfsUrl = "hdfs://localhost:8020";
-    public static String internalUrl = "/PeopleData/";
-    private static String columnFamily = "Name";
-    private static Configuration config = new Configuration();
+import com.anmol.util.Constants;
 
-    public static String getPath(String url) {
-        return hdfsUrl + url;
+public class HbaseWriterMain {
+
+    public Configuration config;
+
+    //Constructor
+    public HbaseWriterMain() {
+        config = new Configuration();
     }
 
-    public static HashMap<Integer, String> getColumnMapping() {
+    private HashMap<Integer, String> getColumnMapping() {
         HashMap<Integer, String> hm = new HashMap<>();
         hm.put(0, "Name");
         hm.put(1, "Age");
@@ -38,8 +35,9 @@ public class main {
         hm.put(5, "Address");
         return hm;
     }
-    //Avoid static functions unless it is a utility class.
-    public static void insertDataToHbase(String[] record, int rowId) throws IOException {
+
+     // making connection with HBase and inserting into HBase table
+    private void insertDataToHbase(String[] record, int rowId) throws IOException {
 
         Table table = null;
         Connection connection = null;
@@ -54,14 +52,14 @@ public class main {
             for(int i = 0; i < record.length; ++ i) {
                 String qualifier = hm.get(i);
                 if(qualifier != null)
-                    p.addColumn(Bytes.toBytes(columnFamily),
+                    p.addColumn(Bytes.toBytes(Constants.columnFamily),
                             Bytes.toBytes(qualifier),
                             Bytes.toBytes(record[i]));
             }
 
             table.put(p);
 
-        }catch (Exception e) { //Dont catch generic exception, catch specific exceptions.
+        }catch (Exception e) {
             e.printStackTrace();
         } finally {
             if(table != null)
@@ -71,10 +69,12 @@ public class main {
         }
     }
 
-    //Avoid static functions.
-    public static void storeInHBASE(FileSystem hdfs, String uri) throws IOException {
+    /*
+    storeinHBASE() will read from HDFS files and will store the data in HBASE/
+     */
+    public void storeInHBASE(FileSystem hdfs, String uri) throws IOException {
 
-        config.set("fs.defaultFS", hdfsUrl);
+        config.set("fs.defaultFS", Constants.hdfsUrl);
         FileStatus[] fileStatus = hdfs.listStatus(new Path(uri));
         Path[] paths = FileUtil.stat2Paths(fileStatus);
 
@@ -83,24 +83,14 @@ public class main {
         int rowId = 1;
         for (Path path : paths) {
             FSDataInputStream inputStream = fileSystem.open(path);
-            //Use meaningfull variable names.
-            String out = IOUtils.toString(inputStream, encoding).split("\n")[1];
-            String[] record = out.split(",");
+
+            String line = IOUtils.toString(inputStream, Constants.encoding).split("\n")[1];
+            String[] record = line.split(",");
             insertDataToHbase(record, rowId);
             rowId++;
             inputStream.close();
         }
         fileSystem.close();
-
     }
 
-    public static void main(String[] args) throws Exception {
-
-    String uri = getPath(internalUrl);
-
-    FileSystem fs = FileSystem.get(new URI(hdfsUrl),config);
-
-    storeInHBASE(fs,uri);
-
-    }
 }
