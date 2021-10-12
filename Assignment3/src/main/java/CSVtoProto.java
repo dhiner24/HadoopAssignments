@@ -1,3 +1,5 @@
+import util.Constant;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -5,7 +7,7 @@ import java.io.IOException;
 
 public class CSVtoProto {
 
-    public static void readBuildingData(String[] buildingData) {
+    private void readBuildingData(String[] buildingData) {
         if (buildingData.length <= 0) return;
 
         protofiles.EmployeeBuilding.Building.Builder building = protofiles.EmployeeBuilding.Building.newBuilder();
@@ -20,7 +22,7 @@ public class CSVtoProto {
     }
 
 
-    public static void readEmployeeData(String[] empData) {
+    private void readEmployeeData(String[] empData) {
         if(empData.length <= 0) return;
 
         protofiles.EmployeeBuilding.Person.Builder employee = protofiles.EmployeeBuilding.Person.newBuilder();
@@ -36,7 +38,7 @@ public class CSVtoProto {
         System.out.println(employee.toString());
     }
 
-
+    //reading the CSV file and setting it to proto objects
     public void printData(String path , boolean isEmployee) {
         try {
 
@@ -65,20 +67,5 @@ public class CSVtoProto {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-
-    public static void main(String[] args) {
-
-        String employeeCSVPath = "/Users/anmolgarg/Desktop/PersonData.csv";
-        String buildingCSVPath = "/Users/anmolgarg/Desktop/Building.csv";
-
-        CSVtoProto dataHandler = new CSVtoProto();
-
-        // printing employee csv in proto format
-        dataHandler.printData(employeeCSVPath , true);
-
-        //printing buikdind csv in proto format
-        dataHandler.printData(buildingCSVPath ,false);
     }
 }
