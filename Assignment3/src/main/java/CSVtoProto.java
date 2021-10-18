@@ -1,3 +1,4 @@
+import protofiles.EmployeeBuilding;
 import util.Constant;
 
 import java.io.BufferedReader;
@@ -33,7 +34,7 @@ public class CSVtoProto {
                 .setEmail(empData[3])
                 .setDepartment(empData[4])
                 .setBuildingCode(empData[5])
-                .setFloorNumber(Integer.parseInt(empData[6]));
+                .setFloorNumberValue(Integer.parseInt(empData[6]));
 
         System.out.println(employee.toString());
     }

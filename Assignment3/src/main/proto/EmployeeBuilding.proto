@@ -9,7 +9,22 @@ message Person {
   string Email = 4;
   string Department = 5;
   string Building_Code = 6;
-  int32 Floor_Number = 7;
+
+  enum Floor{
+    UNKNOWN =0;
+    ONE =1;
+    TWO =2;
+    THREE=3;
+    FOUR=4;
+    FIVE=5;
+    SIX=6;
+    SEVEN=7;
+    EIGHT=8;
+    NINE=9;
+    TEN=10;
+  }
+
+  Floor Floor_Number = 7;
 }
 
 message Building {

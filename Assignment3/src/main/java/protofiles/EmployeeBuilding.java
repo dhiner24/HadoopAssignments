@@ -85,10 +85,15 @@ public final class EmployeeBuilding {
         getBuildingCodeBytes();
 
     /**
-     * <code>int32 Floor_Number = 7;</code>
+     * <code>.protofiles.Person.Floor Floor_Number = 7;</code>
+     * @return The enum numeric value on the wire for floorNumber.
+     */
+    int getFloorNumberValue();
+    /**
+     * <code>.protofiles.Person.Floor Floor_Number = 7;</code>
      * @return The floorNumber.
      */
-    int getFloorNumber();
+    protofiles.EmployeeBuilding.Person.Floor getFloorNumber();
   }
   /**
    * Protobuf type {@code protofiles.Person}
@@ -108,6 +113,7 @@ public final class EmployeeBuilding {
       email_ = "";
       department_ = "";
       buildingCode_ = "";
+      floorNumber_ = 0;
     }
 
     @java.lang.Override
@@ -176,8 +182,9 @@ public final class EmployeeBuilding {
               break;
             }
             case 56: {
+              int rawValue = input.readEnum();
 
-              floorNumber_ = input.readInt32();
+              floorNumber_ = rawValue;
               break;
             }
             default: {
@@ -210,6 +217,195 @@ public final class EmployeeBuilding {
       return protofiles.EmployeeBuilding.internal_static_protofiles_Person_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               protofiles.EmployeeBuilding.Person.class, protofiles.EmployeeBuilding.Person.Builder.class);
+    }
+
+    /**
+     * Protobuf enum {@code protofiles.Person.Floor}
+     */
+    public enum Floor
+        implements com.google.protobuf.ProtocolMessageEnum {
+      /**
+       * <code>UNKNOWN = 0;</code>
+       */
+      UNKNOWN(0),
+      /**
+       * <code>ONE = 1;</code>
+       */
+      ONE(1),
+      /**
+       * <code>TWO = 2;</code>
+       */
+      TWO(2),
+      /**
+       * <code>THREE = 3;</code>
+       */
+      THREE(3),
+      /**
+       * <code>FOUR = 4;</code>
+       */
+      FOUR(4),
+      /**
+       * <code>FIVE = 5;</code>
+       */
+      FIVE(5),
+      /**
+       * <code>SIX = 6;</code>
+       */
+      SIX(6),
+      /**
+       * <code>SEVEN = 7;</code>
+       */
+      SEVEN(7),
+      /**
+       * <code>EIGHT = 8;</code>
+       */
+      EIGHT(8),
+      /**
+       * <code>NINE = 9;</code>
+       */
+      NINE(9),
+      /**
+       * <code>TEN = 10;</code>
+       */
+      TEN(10),
+      UNRECOGNIZED(-1),
+      ;
+
+      /**
+       * <code>UNKNOWN = 0;</code>
+       */
+      public static final int UNKNOWN_VALUE = 0;
+      /**
+       * <code>ONE = 1;</code>
+       */
+      public static final int ONE_VALUE = 1;
+      /**
+       * <code>TWO = 2;</code>
+       */
+      public static final int TWO_VALUE = 2;
+      /**
+       * <code>THREE = 3;</code>
+       */
+      public static final int THREE_VALUE = 3;
+      /**
+       * <code>FOUR = 4;</code>
+       */
+      public static final int FOUR_VALUE = 4;
+      /**
+       * <code>FIVE = 5;</code>
+       */
+      public static final int FIVE_VALUE = 5;
+      /**
+       * <code>SIX = 6;</code>
+       */
+      public static final int SIX_VALUE = 6;
+      /**
+       * <code>SEVEN = 7;</code>
+       */
+      public static final int SEVEN_VALUE = 7;
+      /**
+       * <code>EIGHT = 8;</code>
+       */
+      public static final int EIGHT_VALUE = 8;
+      /**
+       * <code>NINE = 9;</code>
+       */
+      public static final int NINE_VALUE = 9;
+      /**
+       * <code>TEN = 10;</code>
+       */
+      public static final int TEN_VALUE = 10;
+
+
+      public final int getNumber() {
+        if (this == UNRECOGNIZED) {
+          throw new java.lang.IllegalArgumentException(
+              "Can't get the number of an unknown enum value.");
+        }
+        return value;
+      }
+
+      /**
+       * @param value The numeric wire value of the corresponding enum entry.
+       * @return The enum associated with the given numeric wire value.
+       * @deprecated Use {@link #forNumber(int)} instead.
+       */
+      @java.lang.Deprecated
+      public static Floor valueOf(int value) {
+        return forNumber(value);
+      }
+
+      /**
+       * @param value The numeric wire value of the corresponding enum entry.
+       * @return The enum associated with the given numeric wire value.
+       */
+      public static Floor forNumber(int value) {
+        switch (value) {
+          case 0: return UNKNOWN;
+          case 1: return ONE;
+          case 2: return TWO;
+          case 3: return THREE;
+          case 4: return FOUR;
+          case 5: return FIVE;
+          case 6: return SIX;
+          case 7: return SEVEN;
+          case 8: return EIGHT;
+          case 9: return NINE;
+          case 10: return TEN;
+          default: return null;
+        }
+      }
+
+      public static com.google.protobuf.Internal.EnumLiteMap<Floor>
+          internalGetValueMap() {
+        return internalValueMap;
+      }
+      private static final com.google.protobuf.Internal.EnumLiteMap<
+          Floor> internalValueMap =
+            new com.google.protobuf.Internal.EnumLiteMap<Floor>() {
+              public Floor findValueByNumber(int number) {
+                return Floor.forNumber(number);
+              }
+            };
+
+      public final com.google.protobuf.Descriptors.EnumValueDescriptor
+          getValueDescriptor() {
+        if (this == UNRECOGNIZED) {
+          throw new java.lang.IllegalStateException(
+              "Can't get the descriptor of an unrecognized enum value.");
+        }
+        return getDescriptor().getValues().get(ordinal());
+      }
+      public final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptorForType() {
+        return getDescriptor();
+      }
+      public static final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptor() {
+        return protofiles.EmployeeBuilding.Person.getDescriptor().getEnumTypes().get(0);
+      }
+
+      private static final Floor[] VALUES = values();
+
+      public static Floor valueOf(
+          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+        if (desc.getType() != getDescriptor()) {
+          throw new java.lang.IllegalArgumentException(
+            "EnumValueDescriptor is not for this type.");
+        }
+        if (desc.getIndex() == -1) {
+          return UNRECOGNIZED;
+        }
+        return VALUES[desc.getIndex()];
+      }
+
+      private final int value;
+
+      private Floor(int value) {
+        this.value = value;
+      }
+
+      // @@protoc_insertion_point(enum_scope:protofiles.Person.Floor)
     }
 
     public static final int EMPLOYEE_ID_FIELD_NUMBER = 1;
@@ -416,12 +612,20 @@ public final class EmployeeBuilding {
     public static final int FLOOR_NUMBER_FIELD_NUMBER = 7;
     private int floorNumber_;
     /**
-     * <code>int32 Floor_Number = 7;</code>
+     * <code>.protofiles.Person.Floor Floor_Number = 7;</code>
+     * @return The enum numeric value on the wire for floorNumber.
+     */
+    @java.lang.Override public int getFloorNumberValue() {
+      return floorNumber_;
+    }
+    /**
+     * <code>.protofiles.Person.Floor Floor_Number = 7;</code>
      * @return The floorNumber.
      */
-    @java.lang.Override
-    public int getFloorNumber() {
-      return floorNumber_;
+    @java.lang.Override public protofiles.EmployeeBuilding.Person.Floor getFloorNumber() {
+      @SuppressWarnings("deprecation")
+      protofiles.EmployeeBuilding.Person.Floor result = protofiles.EmployeeBuilding.Person.Floor.valueOf(floorNumber_);
+      return result == null ? protofiles.EmployeeBuilding.Person.Floor.UNRECOGNIZED : result;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -456,8 +660,8 @@ public final class EmployeeBuilding {
       if (!getBuildingCodeBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 6, buildingCode_);
       }
-      if (floorNumber_ != 0) {
-        output.writeInt32(7, floorNumber_);
+      if (floorNumber_ != protofiles.EmployeeBuilding.Person.Floor.UNKNOWN.getNumber()) {
+        output.writeEnum(7, floorNumber_);
       }
       unknownFields.writeTo(output);
     }
@@ -487,9 +691,9 @@ public final class EmployeeBuilding {
       if (!getBuildingCodeBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(6, buildingCode_);
       }
-      if (floorNumber_ != 0) {
+      if (floorNumber_ != protofiles.EmployeeBuilding.Person.Floor.UNKNOWN.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(7, floorNumber_);
+          .computeEnumSize(7, floorNumber_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -518,8 +722,7 @@ public final class EmployeeBuilding {
           .equals(other.getDepartment())) return false;
       if (!getBuildingCode()
           .equals(other.getBuildingCode())) return false;
-      if (getFloorNumber()
-          != other.getFloorNumber()) return false;
+      if (floorNumber_ != other.floorNumber_) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -544,7 +747,7 @@ public final class EmployeeBuilding {
       hash = (37 * hash) + BUILDING_CODE_FIELD_NUMBER;
       hash = (53 * hash) + getBuildingCode().hashCode();
       hash = (37 * hash) + FLOOR_NUMBER_FIELD_NUMBER;
-      hash = (53 * hash) + getFloorNumber();
+      hash = (53 * hash) + floorNumber_;
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -796,8 +999,8 @@ public final class EmployeeBuilding {
           buildingCode_ = other.buildingCode_;
           onChanged();
         }
-        if (other.getFloorNumber() != 0) {
-          setFloorNumber(other.getFloorNumber());
+        if (other.floorNumber_ != 0) {
+          setFloorNumberValue(other.getFloorNumberValue());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -1239,28 +1442,51 @@ public final class EmployeeBuilding {
         return this;
       }
 
-      private int floorNumber_ ;
+      private int floorNumber_ = 0;
       /**
-       * <code>int32 Floor_Number = 7;</code>
-       * @return The floorNumber.
+       * <code>.protofiles.Person.Floor Floor_Number = 7;</code>
+       * @return The enum numeric value on the wire for floorNumber.
        */
-      @java.lang.Override
-      public int getFloorNumber() {
+      @java.lang.Override public int getFloorNumberValue() {
         return floorNumber_;
       }
       /**
-       * <code>int32 Floor_Number = 7;</code>
-       * @param value The floorNumber to set.
+       * <code>.protofiles.Person.Floor Floor_Number = 7;</code>
+       * @param value The enum numeric value on the wire for floorNumber to set.
        * @return This builder for chaining.
        */
-      public Builder setFloorNumber(int value) {
+      public Builder setFloorNumberValue(int value) {
         
         floorNumber_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>int32 Floor_Number = 7;</code>
+       * <code>.protofiles.Person.Floor Floor_Number = 7;</code>
+       * @return The floorNumber.
+       */
+      @java.lang.Override
+      public protofiles.EmployeeBuilding.Person.Floor getFloorNumber() {
+        @SuppressWarnings("deprecation")
+        protofiles.EmployeeBuilding.Person.Floor result = protofiles.EmployeeBuilding.Person.Floor.valueOf(floorNumber_);
+        return result == null ? protofiles.EmployeeBuilding.Person.Floor.UNRECOGNIZED : result;
+      }
+      /**
+       * <code>.protofiles.Person.Floor Floor_Number = 7;</code>
+       * @param value The floorNumber to set.
+       * @return This builder for chaining.
+       */
+      public Builder setFloorNumber(protofiles.EmployeeBuilding.Person.Floor value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        
+        floorNumber_ = value.getNumber();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.protofiles.Person.Floor Floor_Number = 7;</code>
        * @return This builder for chaining.
        */
       public Builder clearFloorNumber() {
@@ -2199,14 +2425,18 @@ public final class EmployeeBuilding {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\026EmployeeBuilding.proto\022\nprotofiles\"\224\001\n" +
+      "\n\026EmployeeBuilding.proto\022\nprotofiles\"\247\002\n" +
       "\006Person\022\023\n\013Employee_ID\030\001 \001(\005\022\022\n\nFirst_Na" +
       "me\030\002 \001(\t\022\021\n\tLast_Name\030\003 \001(\t\022\r\n\005Email\030\004 \001" +
       "(\t\022\022\n\nDepartment\030\005 \001(\t\022\025\n\rBuilding_Code\030" +
-      "\006 \001(\t\022\024\n\014Floor_Number\030\007 \001(\005\"e\n\010Building\022" +
-      "\025\n\rBuilding_Code\030\001 \001(\t\022\023\n\013Total_Floor\030\002 " +
-      "\001(\005\022\025\n\rNum_Companies\030\003 \001(\005\022\026\n\016Cafeteria_" +
-      "Code\030\004 \001(\tb\006proto3"
+      "\006 \001(\t\022.\n\014Floor_Number\030\007 \001(\0162\030.protofiles" +
+      ".Person.Floor\"w\n\005Floor\022\013\n\007UNKNOWN\020\000\022\007\n\003O" +
+      "NE\020\001\022\007\n\003TWO\020\002\022\t\n\005THREE\020\003\022\010\n\004FOUR\020\004\022\010\n\004FI" +
+      "VE\020\005\022\007\n\003SIX\020\006\022\t\n\005SEVEN\020\007\022\t\n\005EIGHT\020\010\022\010\n\004N" +
+      "INE\020\t\022\007\n\003TEN\020\n\"e\n\010Building\022\025\n\rBuilding_C" +
+      "ode\030\001 \001(\t\022\023\n\013Total_Floor\030\002 \001(\005\022\025\n\rNum_Co" +
+      "mpanies\030\003 \001(\005\022\026\n\016Cafeteria_Code\030\004 \001(\tb\006p" +
+      "roto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

@@ -13,7 +13,6 @@
 *.ear
 
 ### Gradle ###
-.gradle
 /build/
 
 # Ignore Gradle GUI config
