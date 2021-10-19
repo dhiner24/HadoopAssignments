@@ -1,0 +1,34 @@
+syntax="proto3";
+
+package proto.employee;
+
+option java_multiple_files = true;
+
+message Employee{
+  //employee_id;name;building_code;floor_number;salary;department
+  int32 employee_id =1;
+  string name = 2;
+  int32 building_code = 3;
+  Floor floor_number = 4;
+  int32 salary=5;
+  string department=6;
+  int32 cafeteria_code=7;
+}
+
+enum Floor{
+  UNKNOWN =0;
+  ONE =1;
+  TWO =2;
+  THREE=3;
+  FOUR=4;
+  FIVE=5;
+  SIX=6;
+  SEVEN=7;
+  EIGHT=8;
+  NINE=9;
+  TEN=10;
+}
+
+message EmployeeList{
+  repeated Employee employees = 1;
+}

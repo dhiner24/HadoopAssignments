@@ -1,0 +1,59 @@
+plugins {
+    id 'java'
+    id 'idea'
+    id "com.google.protobuf" version "0.8.16"
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+//    maven { url "http://repo.hortonworks.com/content/repositories/releases/"}
+    maven { url "https://plugins.gradle.org/m2/" }
+}
+protobuf {
+    generatedFilesBaseDir = "$projectDir/src"
+}
+
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    //Adding dependencies for protobuf
+
+    implementation 'com.google.protobuf:protobuf-java:3.17.3'
+
+
+    //Adding Hadoop Dependencies
+    implementation group: "org.apache.hadoop", name: "hadoop-common", version: "3.3.0"
+    implementation group: "org.apache.hadoop", name: "hadoop-client", version: "3.3.0"
+    implementation group: "org.apache.hadoop", name: "hadoop-hdfs", version: "3.3.0"
+
+
+    //Adding HBase dependencies
+    implementation group: "org.apache.hbase", name: "hbase-common", version: "2.2.3"
+    implementation group: "org.apache.hbase", name: "hbase-client", version: "2.2.3"
+    implementation group: "org.apache.hbase", name: "hbase-server", version: "2.2.3"
+    implementation group: "org.apache.hbase", name: "hbase-mapreduce", version: "2.2.3"
+
+    //Adding dependencies for Java Faker to generate data
+    implementation group: 'com.github.javafaker', name: 'javafaker', version: '1.0.2'
+
+    implementation 'commons-io:commons-io:2.11.0'
+
+    //Default dependencies for Test projects
+    testImplementation "org.junit.jupiter:junit-jupiter-api:5.7.0"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.7.0"
+
+    implementation group: 'com.github.javafaker', name: 'javafaker', version: '0.15'
+    implementation group: 'com.opencsv', name: 'opencsv', version: '3.3'
+
+
+    implementation 'org.apache.hadoop:hadoop-mapreduce-client-common:2.8.4'
+}
+
+test {
+    useJUnitPlatform()
+}
