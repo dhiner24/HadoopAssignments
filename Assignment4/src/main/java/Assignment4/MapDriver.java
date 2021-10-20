@@ -16,15 +16,21 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import java.io.IOException;
 import java.net.URI;
 
-import static Assignment4.Constants.*;
+import static Assignment4.util.Constants.*;
 
 public class MapDriver {
+
+    public MapDriver()
+    {
+        System.out.println("Inside Map driver class");
+    }
+
 
     public void runDriver() throws IOException, InterruptedException, ClassNotFoundException {
         Class<EmployeeMapper> employeeMapperClass = EmployeeMapper.class;
         Class<BuildingMapper> buildingMapperClass = BuildingMapper.class;
         driver(EMPLOYEE_TABLE_NAME, EMPLOYEE_HDFS_INPUT_PATH, EMPLOYEE_HFILE_OUTPUT_PATH, employeeMapperClass,null);
-        driver(BUILDING_TABLE_NAME, BUILDING_HDFS_INPUT_PATH, BUILDING_HFILE_OUTPUT_PATH, null,buildingMapperClass);
+        //driver(BUILDING_TABLE_NAME, BUILDING_HDFS_INPUT_PATH, BUILDING_HFILE_OUTPUT_PATH, null,buildingMapperClass);
     }
 
     private void driver(String tableToInsert, String hdfsInputPath, String hfileOutputPath, Class<EmployeeMapper> employeeMapperClass,Class<BuildingMapper> buildingMapperClass)
@@ -44,6 +50,9 @@ public class MapDriver {
         job.setInputFormatClass(WholeFileInputFormat.class);
         //job.setInputFormatClass(TextInputFormat.class);
         //TextInputFormat.setInputPaths(job, hdfsInputPath);
+
+        job.setNumReduceTasks(0);
+
         FileInputFormat.setInputPaths(job, hdfsInputPath);
         job.setMapOutputKeyClass(ImmutableBytesWritable.class);
         if(employeeMapperClass!=null) {
@@ -55,11 +64,13 @@ public class MapDriver {
         FileOutputFormat.setOutputPath(job, new Path(hfileOutputPath));
         job.setMapOutputValueClass(Put.class);
         TableName tableName = TableName.valueOf(tableToInsert);
-        try (Connection conn = ConnectionFactory.createConnection(configuration);
-             Table tablee = conn.getTable(tableName);
-             RegionLocator regionLocator = conn.getRegionLocator(tableName)) {
-            HFileOutputFormat2.configureIncrementalLoad(job, tablee, regionLocator);
-        }
+
+        Connection conn = ConnectionFactory.createConnection(configuration);
+        Table tablee = conn.getTable(tableName);
+        RegionLocator regionLocator = conn.getRegionLocator(tableName);
+
+        HFileOutputFormat2.configureIncrementalLoad(job, tablee, regionLocator);
+
         boolean b = job.waitForCompletion(true);
         System.out.println(b);
         if (job.isSuccessful()) {

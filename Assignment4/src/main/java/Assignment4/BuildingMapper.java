@@ -11,7 +11,7 @@ import proto.building.BuildingList;
 
 import java.util.Arrays;
 
-import static Assignment4.Constants.*;
+import static Assignment4.util.Constants.*;
 
 public class BuildingMapper extends Mapper<NullWritable, BytesWritable, ImmutableBytesWritable, Put> {
 

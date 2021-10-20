@@ -11,7 +11,7 @@ import proto.employee.EmployeeList;
 
 import java.util.Arrays;
 
-import static Assignment4.Constants.*;
+import static Assignment4.util.Constants.*;
 
 public class EmployeeMapper extends Mapper<NullWritable, BytesWritable, ImmutableBytesWritable, Put> {
 

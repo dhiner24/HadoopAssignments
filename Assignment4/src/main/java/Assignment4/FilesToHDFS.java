@@ -12,7 +12,7 @@ import org.apache.hadoop.io.IOUtils;
 import java.io.*;
 import java.net.URI;
 
-import static Assignment4.Constants.*;
+import static Assignment4.util.Constants.*;
 
 
 public class FilesToHDFS {
@@ -23,13 +23,19 @@ public class FilesToHDFS {
         String inputPathToBuildingSerializedFile = PATH + BUILDING_SERIALIZED_FILE;
         String inputPathToEmployeeSerializedFile = PATH + EMPLOYEE_SERIALIZED_FILE;
 
-       // storeSerializedFile(inputPathToEmployeeSerializedFile, EMPLOYEE_HDFS_OUTPUT_PATH);
-       // storeSerializedFile(inputPathToBuildingSerializedFile, BUILDING_HDFS_OUTPUT_PATH);
-        createTableEmployee(EMPLOYEE_TABLE_NAME);
-        createTableBuilding(BUILDING_TABLE_NAME);
+        storeSerializedFile(inputPathToEmployeeSerializedFile, EMPLOYEE_HDFS_OUTPUT_PATH);
+        storeSerializedFile(inputPathToBuildingSerializedFile, BUILDING_HDFS_OUTPUT_PATH);
+
+        // setting configuration and connection for HBASE
+        Configuration config = HBaseConfiguration.create();
+        Connection connection = ConnectionFactory.createConnection(config);
+        Admin hAdmin = connection.getAdmin();
+
+        createTableEmployee(EMPLOYEE_TABLE_NAME , hAdmin);
+        createTableBuilding(BUILDING_TABLE_NAME , hAdmin);
     }
 
-    public void storeSerializedFile(String local_path, String hdfs_output_path) throws IOException {
+    private void storeSerializedFile(String local_path, String hdfs_output_path) throws IOException {
         InputStream in = new BufferedInputStream(new FileInputStream(local_path));
         Configuration conf = new Configuration();
         Path output = new Path(hdfs_output_path);
@@ -43,11 +49,8 @@ public class FilesToHDFS {
         System.out.println(" copied to HDFS");
     }
 
-    public void createTableBuilding(String tableNameToCreate) throws IOException {
+    private void createTableBuilding(String tableNameToCreate , Admin hAdmin) throws IOException {
 
-        Configuration config = HBaseConfiguration.create();
-        Connection connection = ConnectionFactory.createConnection(config);
-        Admin hAdmin = connection.getAdmin();
         if (hAdmin.tableExists(TableName.valueOf(tableNameToCreate))) {
             System.out.println(TABLE_ALREADY_EXISTS);
             return;
@@ -59,13 +62,11 @@ public class FilesToHDFS {
         tableDescBuilder.setColumnFamily(columnDescBuilderBuilding.build());
         tableDescBuilder.build();
         hAdmin.createTable(tableDescBuilder.build());
-        System.out.println(tableNameToCreate + TABLE_CREATED);
+            System.out.println(tableNameToCreate + TABLE_CREATED);
     }
 
-    public void createTableEmployee(String tableNameToCreate) throws IOException {
-        Configuration config = HBaseConfiguration.create();
-        Connection connection = ConnectionFactory.createConnection(config);
-        Admin hAdmin = connection.getAdmin();
+    private void createTableEmployee(String tableNameToCreate , Admin hAdmin) throws IOException {
+
         if (hAdmin.tableExists(TableName.valueOf(tableNameToCreate))) {
             System.out.println(TABLE_ALREADY_EXISTS);
             return;

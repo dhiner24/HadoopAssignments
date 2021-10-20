@@ -17,6 +17,7 @@ public class Main {
         FileSystem fs = FileSystem.get(new URI(Constants.hdfsUrl),obj.config);
 
         String uri = Constants.hdfsUrl + Constants.internalUrl;
+        obj.createTable("people");
         obj.storeInHBASE(fs , uri);
     }
 }
