@@ -14,7 +14,7 @@ import java.net.URI;
 
 import static Assignment4.util.Constants.*;
 
-
+//Class name should be a noun.i.e. FilesToHDFSWriter.
 public class FilesToHDFS {
 
     // It Stores employee and building serializedfile to hdfs and creates building and employee table.
@@ -48,7 +48,7 @@ public class FilesToHDFS {
         IOUtils.copyBytes(in, out, 4096, true);
         System.out.println(" copied to HDFS");
     }
-
+   //Code duplication in functions createTableBuilding, createTableEmployee can be avoided. And no java doc comments and function comments in this file.
     private void createTableBuilding(String tableNameToCreate , Admin hAdmin) throws IOException {
 
         if (hAdmin.tableExists(TableName.valueOf(tableNameToCreate))) {
