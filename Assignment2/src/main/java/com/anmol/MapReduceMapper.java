@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.StringTokenizer;
 
 public class MapReduceMapper {
-
+   //Java doc comments?
     public static class Map extends MapReduceBase implements
             Mapper<LongWritable, Text, Text, IntWritable> {
 
