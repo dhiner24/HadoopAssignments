@@ -16,6 +16,7 @@ import org.apache.hadoop.mapreduce.lib.input.FileSplit;
 
 import java.io.IOException;
 
+//Class naming is not conveying the responsibility of this class. It could have been better.
 public class WholeFileInputFormat extends FileInputFormat<NullWritable, BytesWritable> {
 
     @Override
