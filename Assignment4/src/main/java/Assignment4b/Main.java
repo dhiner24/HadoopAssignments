@@ -22,6 +22,7 @@ public class Main {
 
 
     public static void main(String[] args) throws IOException, InterruptedException, ClassNotFoundException {
+        //Scan class variable settings are repeated. It can be avoided by putting the common code in a function and calling it twice.
         List<Scan> scans = new ArrayList();
         Scan scan = new Scan();
         scan.setCaching(500);
