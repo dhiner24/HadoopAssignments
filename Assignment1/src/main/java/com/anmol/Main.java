@@ -1,3 +1,4 @@
+
 package com.anmol;
 import com.anmol.util.Constants;
 
@@ -12,7 +13,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException, URISyntaxException {
 
-        HbaseWriterMain obj = new HbaseWriterMain();
+        HbaseWriterMain obj = new HbaseWriterMain(); //use intellij suggested names, eg. hbaseWriterMain instead of obj.
 
         FileSystem fs = FileSystem.get(new URI(Constants.hdfsUrl),obj.config);
 
