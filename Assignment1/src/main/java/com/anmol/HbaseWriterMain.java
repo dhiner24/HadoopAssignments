@@ -78,7 +78,7 @@ public class HbaseWriterMain {
         {
             Configuration conf = HBaseConfiguration.create();
             connection = ConnectionFactory.createConnection(conf);
-            table = connection.getTable(TableName.valueOf("people"));
+            table = connection.getTable(TableName.valueOf("people")); //Do not hard code table names.
             Put p = new Put(Bytes.toBytes(String.valueOf(rowId)));
             for(int i = 0; i < record.length; ++ i) {
                 String qualifier = hm.get(i);
@@ -90,8 +90,8 @@ public class HbaseWriterMain {
 
             table.put(p);
 
-        }catch (Exception e) {
-            e.printStackTrace();
+        }catch (Exception e) { //Catch specific exception instead of generic exception.
+            e.printStackTrace(); 
         } finally {
             if(table != null)
                 table.close();
@@ -103,7 +103,7 @@ public class HbaseWriterMain {
     /*
     storeinHBASE() will read from HDFS files and will store the data in HBASE/
      */
-    public void storeInHBASE(FileSystem hdfs, String uri) throws IOException {
+    public void storeInHBASE(FileSystem hdfs, String uri) throws IOException { 
 
         config.set("fs.defaultFS", Constants.hdfsUrl);
         FileStatus[] fileStatus = hdfs.listStatus(new Path(uri));
