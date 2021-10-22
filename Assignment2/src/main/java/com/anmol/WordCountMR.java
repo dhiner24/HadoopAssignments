@@ -10,7 +10,7 @@ import java.io.IOException;
 
 public class WordCountMR {
 
-
+   //why empty space?
     public static void main(String[] args) throws IOException {
         JobConf config = new JobConf(WordCountMR.class);
 
